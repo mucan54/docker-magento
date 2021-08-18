@@ -78,7 +78,7 @@ bin/composer install
 bin/copyfromcontainer vendor
 
 # Import existing database:
-bin/mysql < backups/magento.sql
+bin/clinotty mysql -hdb -uroot -pmagento magento < backups/magento.sql
 
 # Update database connection details to use the above Docker MySQL credentials:
 # Also note: creds for the MySQL server are defined at startup from env/db.env
@@ -90,6 +90,9 @@ bin/magento app:config:import
 # Set base URLs to local environment URL (if not defined in env.php file):
 bin/magento config:set web/secure/base_url https://yoursite.test/
 bin/magento config:set web/unsecure/base_url https://yoursite.test/
+
+# Set certificate SSL
+bin/setup-ssl yoursite.test
 
 bin/restart
 

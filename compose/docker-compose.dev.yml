@@ -33,7 +33,7 @@ services:
     #  - "host.docker.internal:IP"
 
   mailcatcher:
-    image: schickling/mailcatcher
+    image: sj26/mailcatcher
     ports:
       - "1080:1080"
   # Disabling cron by default as it uses higher CPU, enable if needed
