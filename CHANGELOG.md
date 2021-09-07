@@ -8,6 +8,37 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - PHP image `8.0-fpm-develop` now available for testing purposes.
 
+## [38.0.0] - 2021-07-27
+
+### Added
+- Composer 2 support [#409](https://github.com/markshust/docker-magento/issues/409).
+
+### Fixed
+- Composer `auth.json` not properly set after installation [#42](https://github.com/markshust/docker-magento/issues/42).
+- `bin/remove` not removing containers in newer versions of Docker Compose.
+- Invalid template error with Docker 3.5.1 [#486](https://github.com/markshust/docker-magento/issues/486).
+
+## [37.0.2] - 2021-02-17
+
+### Added
+- New `bin/setup-composer-auth` file to setup Composer auth creds.
+
+## [37.0.1] - 2021-02-15
+
+### Fixed
+- Fix onelinesetup script bug.
+
+## [37.0.0] - 2021-02-14
+
+### Added
+- Official support for Xdebug 3 [#390](https://github.com/markshust/docker-magento/issues/390). The new PHP images are `7.3-fpm-12` & `7.4-fpm-5`.
+- If you need to still use Xdebug 2, update your docker-compose.yml files to instead look at PHP image `7.3-fpm-11` or `7.4-fpm-4`. These images are exactly the same other than being pegged to Xdebug 2.
+
+## [36.0.2] - 2021-02-14
+
+### Updated
+- Reverted Xdebug to version 2 for backwards-compatible support [#390](https://github.com/markshust/docker-magento/issues/390).
+
 ## [36.0.1] - 2021-02-04
 
 ### Updated
@@ -242,7 +273,7 @@ Happy new year! 🎉
 - Fixed logic of `bin/copyfromcontainer` and `bin/copytocontainer` so subdirectories are now properly copied from and to the container
 
 ### Added
-- The `bin/fixowns` script now includes the ability to fix ownerships at the subdirectory level 
+- The `bin/fixowns` script now includes the ability to fix ownerships at the subdirectory level
 - The `bin/copyfromcontainer` and `bin/copytocontainer` scripts now fixes permissions and ownerships of just the subdirectories that are copied
 
 ## [24.1.2] - 2019-10-15
@@ -435,9 +466,9 @@ Happy new year! 🎉
 
 ### Changed
 - Changed the way bind mounts work with Docker compose and Magento 2.
-    - Note that `bin/start` now includes a call to `bin/copydirall` after the containers start. This helper script runs a `docker cp` command of all Magento directories from the container to the host. There is still a bind mount setup to `./src` root directory.
-    - There is a condition/bug within Docker that when named volumes overlap with bind mounts, the named volumes automatically sync back to the host once a `docker cp` command runs, while retaining their named volume status within the Docker container.
-    - We're tapping into this very odd bug and taking advantage of this as long as we can. Since data is still fetched from within the Docker container as a named volume, this should also allow not-so-performant computers to now run this Docker setup, as it provides near or truly native filesystem performance, since requests to these directories are still fetched through the named volume as far as Docker is concerned.
+  - Note that `bin/start` now includes a call to `bin/copydirall` after the containers start. This helper script runs a `docker cp` command of all Magento directories from the container to the host. There is still a bind mount setup to `./src` root directory.
+  - There is a condition/bug within Docker that when named volumes overlap with bind mounts, the named volumes automatically sync back to the host once a `docker cp` command runs, while retaining their named volume status within the Docker container.
+  - We're tapping into this very odd bug and taking advantage of this as long as we can. Since data is still fetched from within the Docker container as a named volume, this should also allow not-so-performant computers to now run this Docker setup, as it provides near or truly native filesystem performance, since requests to these directories are still fetched through the named volume as far as Docker is concerned.
 - `bin/start` now runs in daemon mode, as we also need to run `bin/copydirall` immediately after starting containers so data syncs back to the host (and vice versa). This also eliminates the need to to have a terminal window open all the time for keeping containers running.
 
 ### Added
