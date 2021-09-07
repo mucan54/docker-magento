@@ -27,7 +27,7 @@ curl -s https://raw.githubusercontent.com/luancschmitz/docker-magento/master/lib
 docker-compose build
 
 # Download the version of Magento you want to use with:
-bin/download 2.4.1
+bin/download 2.4.2
 
 # If the download fails, the script will attempt to download Magento with Composer
 
