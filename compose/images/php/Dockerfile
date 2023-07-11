@@ -56,8 +56,7 @@ RUN cd /tmp \
   && rm ioncube_loaders_lin_aarch64.tar.gz \
   && docker-php-ext-enable ioncube
 
-RUN pecl channel-update pecl.php.net \
-  && pecl install xdebug
+RUN pecl install xdebug-3.1.6
 
 RUN docker-php-ext-enable xdebug
 
